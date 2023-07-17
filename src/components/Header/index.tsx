@@ -1,4 +1,4 @@
-import { NavItems } from "../Nav";
+import { NavItems } from "./Nav";
 
 export const Header = () => {
   return (
