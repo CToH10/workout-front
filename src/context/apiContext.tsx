@@ -13,6 +13,7 @@ interface Props {
 
 interface ApiProviderData {
   login: (userData: any) => Promise<void>;
+  token: string | undefined;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -45,7 +46,9 @@ export function ApiProvider({ children }: Props) {
   };
 
   return (
-    <ApiContext.Provider value={{ login }}>{children}</ApiContext.Provider>
+    <ApiContext.Provider value={{ login, token }}>
+      {children}
+    </ApiContext.Provider>
   );
 }
 
