@@ -8,6 +8,14 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -17,11 +25,217 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  vertical-align: baseline;
+  font-family: "Inter", sans-serif;
+  list-style: none;
+  background-color: #0b0d0d;
+}
+
+@layer components {
+  .btn-big {
+    @apply px-7 h-12 rounded font-inter text-btnBig min-w-min;
+  }
+
+  .btn-medium {
+    @apply px-5 py-3 rounded font-inter text-btnMedium;
+  }
+
+  .btn-small {
+    @apply px-2 py-1 rounded text-body2 font-medium;
+  }
+
+  .btn-grey1 {
+    @apply bg-grey-1 text-grey-whiteFixed w-max text-body1 font-semibold;
+  }
+
+  .btn-grey1:hover {
+    @apply bg-grey-2;
+  }
+
+  .btn-grey-light {
+    @apply bg-grey-2 text-grey-6 text-body1 font-semibold;
+  }
+
+  .btn-grey-light:hover {
+    @apply bg-grey-3 text-grey-0;
+  }
+
+  .btn-brand1 {
+    @apply bg-brand-1 text-grey-whiteFixed text-body1 font-semibold;
+  }
+
+  .btn-brand1:hover {
+    @apply bg-brand-2;
+  }
+
+  .btn-brand1:disabled {
+    @apply bg-brand-3 text-brand-4;
+  }
+
+  .btn-brand-opacity {
+    @apply border-2 bg-brand-4 text-brand-1;
+  }
+
+  .btn-brand-opacity:hover {
+    @apply border-2 bg-grey-6 text-brand-1 font-bold border-brand-3;
+  }
+
+  .btn-light {
+    @apply bg-grey-10 text-grey-1;
+  }
+
+  .btn-brand-outline-light {
+    @apply border-2 border-grey-10 text-grey-10;
+  }
+
+  .btn-brand-outline-light:hover {
+    @apply bg-grey-10 text-grey-1;
+  }
+
+  .btn-link {
+    @apply text-grey-6 rounded-lg;
+  }
+
+  .btn-link:hover {
+    @apply text-grey-10;
+  }
+
+  .btn-alert {
+    @apply bg-alert-3 text-alert-1;
+  }
+
+  .btn-alert:hover {
+    @apply bg-alert-2;
+  }
+
+  .btn-success {
+    @apply bg-success-3 text-success-1;
+  }
+
+  .btn-success:hover {
+    @apply bg-success-2;
+  }
+
+  .btn-big:disabled {
+    @apply bg-grey-5 text-grey-whiteFixed;
+  }
+
+  .btn-medium:disabled {
+    @apply bg-grey-5 text-grey-whiteFixed;
+  }
+}
+
+@layer components {
+  .label {
+    @apply font-inter input-label-text;
+  }
+
+  textarea,
+  input {
+    @apply border-2 rounded outline-none pl-4 h-12 bg-grey-1 border-brand-4;
+  }
+
+  textarea::placeholder,
+  input::placeholder {
+    @apply font-normal;
+  }
+
+  textarea::placeholder {
+    @apply py-3 px-0.5;
+  }
+
+  textarea:focus,
+  input:focus {
+    @apply outline-none border-brand-1;
+  }
+
+  textarea:disabled,
+  input:disabled {
+    @apply outline-none bg-grey-8 border-grey-7;
+  }
+
+  select {
+    @apply rounded border-2 border-grey-7 px-4 h-12  bg-grey-1;
+  }
+
+  select:focus {
+    @apply bg-grey-4 border-brand-1 outline-none;
+  }
+
+  .filter-section {
+    @apply mx-4 mb-8 w-72;
+  }
+
+  .filter-input {
+    @apply bg-grey-2 placeholder:heading-7-600 max-w-[44%] px-8 py-2;
+  }
+}
+
+@layer utilities {
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+    appearance: textfield;
+  }
+
+  button {
+    @apply transition ease-in-out delay-150;
+  }
+
+  .scrollbar {
+    scroll-behavior: smooth;
+    scrollbar-color: rgb(69, 41, 230) rgba(0, 0, 0, 0);
+    scrollbar-width: thin;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    @apply bg-grey-whiteFixed;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-brand-1;
+    border-radius: 100vh;
+    border: 3px solid #fff;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-3;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(20%) sepia(94%) saturate(2948%) hue-rotate(245deg)
+      brightness(85%) contrast(116%);
+    @apply mr-3 hover:cursor-pointer;
+  }
+
+  input[type="date"]:invalid::-webkit-datetime-edit {
+    @apply font-normal text-grey-3 bg-grey-1;
+  }
+
+  .filled {
+    -webkit-text-fill-color: #868e96;
+  }
+
+  .position-center {
+    @apply -translate-x-2/4 -translate-y-2/4 top-2/4 left-2/4;
+  }
+
+  @layer components {
+    .error {
+      @apply text-alert-1 mb-3 text-body2 font-bold animate-pulse;
+    }
+  }
 }

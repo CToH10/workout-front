@@ -14,6 +14,7 @@ interface Props {
 interface ApiProviderData {
   login: (userData: any) => Promise<void>;
   logout: () => void;
+  token: string | undefined;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -46,13 +47,12 @@ export function ApiProvider({ children }: Props) {
   };
 
   const logout = () => {
-    destroyCookie(null, "motorShop.token");
+    destroyCookie(null, "workoutManager.token");
     setToken(undefined);
-    router.push("/");
   };
 
   return (
-    <ApiContext.Provider value={{ login, logout }}>
+    <ApiContext.Provider value={{ login, logout, token }}>
       {children}
     </ApiContext.Provider>
   );
