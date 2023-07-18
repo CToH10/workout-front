@@ -41,4 +41,6 @@ export function ApiProvider({ children }: Props) {
       }
     }
   };
+
+  return <ApiContext.Provider value={{ login }}></ApiContext.Provider>;
 }
