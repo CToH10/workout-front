@@ -62,7 +62,7 @@ module.exports = {
     },
     extend: {
       boxShadow: {
-        webkit: "0 0 0px 1000px white inset",
+        white: "0 20px 13px rgb(250, 250, 250 , 0.07))",
       },
     },
   },
