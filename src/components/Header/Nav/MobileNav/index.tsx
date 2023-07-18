@@ -20,7 +20,7 @@ export const MobileNav = () => {
       </button>
 
       {isOpen && (
-        <section className="bg-grey-1 absolute right-4 -bottom-20 min-w-[150px] py-3 rounded-md transition ease-in duration-200">
+        <section className="bg-grey-1 absolute right-4 -bottom-20 min-w-[150px] py-3 rounded-md transition ease-in duration-200 z-30">
           <DesktopNav flexDir="flex-col" />
         </section>
       )}

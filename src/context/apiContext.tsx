@@ -15,6 +15,18 @@ interface ApiProviderData {
   login: (userData: any) => Promise<void>;
   logout: () => void;
   token: string | undefined;
+  profileInfo: () => Promise<void>;
+  userData:
+    | {
+        name: string;
+        email: string;
+        trainingExp: string;
+        id: number;
+        createdAt: string;
+        updatedAt: string;
+        deletedAt: null | string;
+      }
+    | undefined;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -23,17 +35,32 @@ export function ApiProvider({ children }: Props) {
   const [token, setToken] = useState<string | undefined>(
     parseCookies(null, "workoutManager.token")["workoutManager.token"]
   );
+  const [userId, setUserId] = useState<number | undefined>(
+    Number(parseCookies(null, "workoutManager.id")["workoutManager.id"])
+  );
+  const [userData, setUserData] = useState();
+
+  const headers = {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  };
 
   const login = async (userData: any) => {
     try {
       const data = await api.post("login", userData);
 
-      setCookie(null, "workoutManager.token", data.data, {
+      setCookie(null, "workoutManager.token", data.data.token, {
+        maxAge: 60 * 30,
+        path: "/",
+      });
+      setCookie(null, "workoutManager.id", data.data.id, {
         maxAge: 60 * 30,
         path: "/",
       });
 
-      setToken(data.data);
+      setToken(data.data.token);
+      setUserId(data.data.id);
 
       router.push("/");
     } catch (error) {
@@ -48,11 +75,30 @@ export function ApiProvider({ children }: Props) {
 
   const logout = () => {
     destroyCookie(null, "workoutManager.token");
+    destroyCookie(null, "workoutManager.id");
     setToken(undefined);
+    setUserId(undefined);
+    setUserData(undefined);
   };
 
+  const profileInfo = async () => {
+    try {
+      const userInfo = (await api.get(`users/${userId}`, headers)).data;
+
+      setUserData(userInfo);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
   return (
-    <ApiContext.Provider value={{ login, logout, token }}>
+    <ApiContext.Provider
+      value={{ login, logout, token, profileInfo, userData }}
+    >
       {children}
     </ApiContext.Provider>
   );
