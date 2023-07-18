@@ -1,8 +1,10 @@
+"use client";
+
 import { api } from "@/service/api";
 import { AxiosError } from "axios";
 import router from "next/router";
 import { parseCookies, setCookie } from "nookies";
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 interface Props {
@@ -42,5 +44,9 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
-  return <ApiContext.Provider value={{ login }}></ApiContext.Provider>;
+  return (
+    <ApiContext.Provider value={{ login }}>{children}</ApiContext.Provider>
+  );
 }
+
+export const useApi = () => useContext(ApiContext);
