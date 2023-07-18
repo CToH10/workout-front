@@ -47,16 +47,13 @@ export function ApiProvider({ children }: Props) {
   };
 
   const logout = () => {
-    destroyCookie(null, "motorShop.token");
+    destroyCookie(null, "workoutManager.token");
     setToken(undefined);
-    router.push("/");
   };
 
   return (
     <ApiContext.Provider value={{ login, logout, token }}>
-      
       {children}
-    
     </ApiContext.Provider>
   );
 }

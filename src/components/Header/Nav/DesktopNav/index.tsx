@@ -6,7 +6,7 @@ interface DesktopNavProps {
 }
 
 export const DesktopNav = ({ flexDir }: DesktopNavProps) => {
-  const { token } = useApi();
+  const { token, logout } = useApi();
   return (
     <section className={`flex items-center justify-between gap-3 ${flexDir}`}>
       {token ? (
@@ -18,6 +18,7 @@ export const DesktopNav = ({ flexDir }: DesktopNavProps) => {
             className={`btn-medium ${
               flexDir ? "w-4/5" : ""
             }  btn-brand-outline-light`}
+            onClick={logout}
           >
             Sair
           </button>
