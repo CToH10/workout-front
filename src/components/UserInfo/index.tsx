@@ -1,10 +1,14 @@
-'use client'
+"use client";
 
 import { useApi } from "@/context/apiContext";
 import { useEffect } from "react";
 
-export const UserCard = () => {
-    const { userData, profileInfo } = useApi();
+interface UserCardProps {
+  className: string;
+}
+
+export const UserCard = ({ className }: UserCardProps) => {
+  const { userData, profileInfo } = useApi();
   useEffect(() => {
     profileInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,7 +34,9 @@ export const UserCard = () => {
   }
 
   return (
-    <section className="absolute top-[134px] -translate-x-2/4 -translate-y-2/4 left-2/4 w-[250px] max-w-[250px] flex flex-col gap-2 border rounded-md border-brand-4 py-1 px-2 bg-grey-1 z-0">
+    <section
+      className={`${className} w-[250px] max-w-[250px] flex flex-col gap-2 border rounded-md border-brand-4 py-1 px-2 bg-grey-1 z-0`}
+    >
       <h2 className="text-heading2 text-grey-10 overflow-hidden whitespace-nowrap text-ellipsis max-w-full max-h-10">
         {(userData && userData!.name) || "Carregando"}
       </h2>
@@ -41,5 +47,5 @@ export const UserCard = () => {
         {experience}
       </p>
     </section>
-  )
-}
+  );
+};
