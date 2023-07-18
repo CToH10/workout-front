@@ -41,7 +41,7 @@ body {
   }
 
   .btn-medium {
-    @apply px-5 py-2 rounded text-btnMedium;
+    @apply px-5 py-3 rounded font-inter text-btnMedium;
   }
 
   .btn-small {
@@ -77,7 +77,11 @@ body {
   }
 
   .btn-brand-opacity {
-    @apply bg-brand-4 text-brand-1;
+    @apply border-2 bg-brand-4 text-brand-1;
+  }
+
+  .btn-brand-opacity:hover {
+    @apply border-2 bg-grey-6 text-brand-1 font-bold border-brand-3;
   }
 
   .btn-light {
