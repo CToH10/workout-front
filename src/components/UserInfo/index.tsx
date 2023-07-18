@@ -35,7 +35,7 @@ export const UserCard = ({ className }: UserCardProps) => {
 
   return (
     <section
-      className={`${className} w-[250px] max-w-[250px] flex flex-col gap-2 border rounded-md border-brand-4 py-1 px-2 bg-grey-1 z-0`}
+      className={`${className} w-[250px] max-w-[250px] flex flex-col gap-2 border rounded-md border-brand-4 py-1 px-2 bg-grey-1 -z-10`}
     >
       <h2 className="text-heading2 text-grey-10 overflow-hidden whitespace-nowrap text-ellipsis max-w-full max-h-10">
         {(userData && userData!.name) || "Carregando"}
