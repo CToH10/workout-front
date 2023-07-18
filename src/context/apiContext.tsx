@@ -3,7 +3,7 @@
 import { api } from "@/service/api";
 import { AxiosError } from "axios";
 import router from "next/router";
-import { parseCookies, setCookie } from "nookies";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { ReactNode, createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -13,6 +13,7 @@ interface Props {
 
 interface ApiProviderData {
   login: (userData: any) => Promise<void>;
+  logout: () => void;
   token: string | undefined;
 }
 
@@ -45,9 +46,17 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
+  const logout = () => {
+    destroyCookie(null, "motorShop.token");
+    setToken(undefined);
+    router.push("/");
+  };
+
   return (
-    <ApiContext.Provider value={{ login, token }}>
+    <ApiContext.Provider value={{ login, logout, token }}>
+      
       {children}
+    
     </ApiContext.Provider>
   );
 }
