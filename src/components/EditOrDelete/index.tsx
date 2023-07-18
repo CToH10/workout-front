@@ -7,7 +7,7 @@ export const EditOrDelete = ({ className }: EditOrDeleteProps) => {
     <section
       className={`${className} flex justify-between items-center w-[150px] gap-2`}
     >
-      <button className="btn-medium btn-brand1">
+      <button className="btn-medium btn-brand-opacity">
         <FaPen />
       </button>
       <button className="btn-medium btn-alert">
