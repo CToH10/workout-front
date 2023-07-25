@@ -37,13 +37,13 @@ export const UserCard = ({ className }: UserCardProps) => {
     <section
       className={`${className} w-[250px] max-w-[250px] flex flex-col gap-2 border rounded-md border-brand-4 py-1 px-2 bg-grey-1 -z-10`}
     >
-      <h2 className="text-heading2 text-grey-10 overflow-hidden whitespace-nowrap text-ellipsis max-w-full max-h-10">
+      <h2 className="text-heading2 text-grey-10 overflow-hidden whitespace-nowrap text-ellipsis max-w-full max-h-10 min-h-[45px]">
         {(userData && userData!.name) || "Carregando"}
       </h2>
-      <p className="text-heading6 text-grey-10 overflow-hidden whitespace-nowrap text-ellipsis max-w-full max-h-10">
+      <p className="text-heading6 text-grey-10 overflow-hidden whitespace-nowrap text-ellipsis max-w-full max-h-10 min-h-[28px]">
         {(userData && userData!.email) || "Carregando"}
       </p>
-      <p className=" text-heading6 text-brand-3 overflow-hidden whitespace-nowrap text-ellipsis max-w-full max-h-10">
+      <p className=" text-heading6 text-brand-3 overflow-hidden whitespace-nowrap text-ellipsis max-w-full max-h-10 min-h-[28px]">
         {experience}
       </p>
     </section>
