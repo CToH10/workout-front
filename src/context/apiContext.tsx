@@ -1,5 +1,6 @@
 "use client";
 
+import { DailyWorkoutType } from "@/@types/dailyWorkout";
 import { api } from "@/service/api";
 import { AxiosError } from "axios";
 import router from "next/router";
@@ -27,6 +28,8 @@ interface ApiProviderData {
         deletedAt: null | string;
       }
     | undefined;
+  workoutByUserInfo: () => Promise<void>;
+  workoutByUser: DailyWorkoutType[];
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -39,6 +42,9 @@ export function ApiProvider({ children }: Props) {
     Number(parseCookies(null, "workoutManager.id")["workoutManager.id"])
   );
   const [userData, setUserData] = useState();
+  const [workoutByUser, setWorkoutByUser] = useState<Array<DailyWorkoutType>>(
+    []
+  );
 
   const headers = {
     headers: {
@@ -85,7 +91,25 @@ export function ApiProvider({ children }: Props) {
     try {
       const userInfo = (await api.get(`users/${userId}`, headers)).data;
 
+      workoutByUserInfo();
+
       setUserData(userInfo);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
+  const workoutByUserInfo = async () => {
+    try {
+      const workout = (await api.get(`workout/user/${userId}`, headers)).data
+        .daily_workout;
+
+      setWorkoutByUser(workout);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(`${error.response?.data.message}`);
@@ -97,7 +121,15 @@ export function ApiProvider({ children }: Props) {
   };
   return (
     <ApiContext.Provider
-      value={{ login, logout, token, profileInfo, userData }}
+      value={{
+        login,
+        logout,
+        token,
+        profileInfo,
+        userData,
+        workoutByUserInfo,
+        workoutByUser,
+      }}
     >
       {children}
     </ApiContext.Provider>
