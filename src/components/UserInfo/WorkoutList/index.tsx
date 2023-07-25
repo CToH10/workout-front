@@ -4,22 +4,27 @@ import { useApi } from "@/context/apiContext";
 import { DailyExerciseList } from "./DailyExercise";
 import { getWorkoutDate } from "@/utils/workoutDate";
 
-export const WorkoutList = () => {
+interface WorkoutListProps {
+  className: string;
+}
+
+export const WorkoutList = ({ className }: WorkoutListProps) => {
   const { workoutByUser } = useApi();
   return (
-    <ul className="">
-      {workoutByUser.map((workout) => {
-        console.log(workout);
-
-        return (
-          <li key={workout.id} className="">
-            <p className="text-heading3 text-grey-9">
-              {getWorkoutDate(workout.date)}
-            </p>
-            <DailyExerciseList daily_workout={workout.daily_exercise} />
-          </li>
-        );
-      })}
-    </ul>
+    <section className={className}>
+      <p className="text-heading2 text-grey-7 font-bold">Treinos</p>
+      <ul>
+        {workoutByUser.map((workout) => {
+          return (
+            <li key={workout.id} className="mb-3">
+              <p className="text-heading3 text-grey-9 font-semibold">
+                {getWorkoutDate(workout.date)}
+              </p>
+              <DailyExerciseList daily_workout={workout.daily_exercise} />
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 };
