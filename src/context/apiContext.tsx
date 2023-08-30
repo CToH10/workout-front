@@ -3,7 +3,7 @@
 import { DailyWorkoutType } from "@/@types/dailyWorkout";
 import { api } from "@/service/api";
 import { AxiosError } from "axios";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { ReactNode, createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
@@ -45,6 +45,8 @@ export function ApiProvider({ children }: Props) {
   const [workoutByUser, setWorkoutByUser] = useState<Array<DailyWorkoutType>>(
     []
   );
+
+  const router = useRouter();
 
   const headers = {
     headers: {

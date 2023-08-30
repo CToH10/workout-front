@@ -2,6 +2,7 @@ import { TLogin, loginSchema } from "@/schemas/loginSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Field } from "@/components/Field";
+import { useApi } from "@/context/apiContext";
 
 export const LoginForm = () => {
   const {
@@ -13,8 +14,12 @@ export const LoginForm = () => {
     mode: "onBlur",
   });
 
+  const { login } = useApi();
+
   const onSubmit = (data: TLogin) => {
-    console.log(data);
+    // console.log(data);
+
+    login(data);
   };
 
   return (
@@ -37,7 +42,10 @@ export const LoginForm = () => {
         register={register("password")}
         error={errors.password?.message}
       />
-      <button type="submit" className="btn-medium w-4/5 btn-brand-opacity self-center">
+      <button
+        type="submit"
+        className="btn-medium w-4/5 btn-brand-opacity self-center"
+      >
         Login
       </button>
     </form>
