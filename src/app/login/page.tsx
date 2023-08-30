@@ -1,3 +1,13 @@
+'use client'
+import { LoginForm } from "@/components/Forms/LoginForm";
+
 export default function LoginPage() {
-  return <></>;
+  return (
+    <>
+    <main>
+
+      <LoginForm />
+    </main>
+    </>
+  );
 }
