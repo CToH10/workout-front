@@ -1,6 +1,7 @@
 "use client";
 
 import { useApi } from "@/context/apiContext";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { IoPersonSharp } from "react-icons/io5";
 
@@ -36,11 +37,12 @@ export const DesktopNav = ({ flexDir }: DesktopNavProps) => {
         </>
       ) : (
         <>
-          <button
+          <Link
             className={`btn-medium ${flexDir ? "w-4/5" : ""} btn-brand-opacity`}
+            href="/login"
           >
             Login
-          </button>
+          </Link>
           <button
             className={`btn-medium ${
               flexDir ? "w-4/5" : ""
