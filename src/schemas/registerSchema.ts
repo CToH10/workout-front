@@ -1,8 +1,9 @@
 import { z } from "zod";
 
-const strongPassword: RegExp = /((?=.d)(?=.[a-z])(?=.[A-Z])(?=.[W]).{8,64})/g;
+const strongPassword: RegExp =
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
 const passwordMessage: string =
-  "Must contain at least one lowercase, one uppercase, a number and a special character";
+  "Must contain at least one lowercase, one uppercase and a number; can contain a special character";
 
 export const registerSchema = z
   .object({
@@ -12,11 +13,13 @@ export const registerSchema = z
     password: z.string().min(10).regex(strongPassword, passwordMessage),
     confirmPassword: z.string().nonempty(),
   })
-  .superRefine(({ password, confirmPassword }, ctx) => {
+  .superRefine(({ confirmPassword, password }, ctx) => {
     if (password !== confirmPassword) {
       ctx.addIssue({
         code: "custom",
         message: "Password did not match",
+
+        path: ["confirmPassword"],
       });
     }
   });
