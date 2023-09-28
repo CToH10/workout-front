@@ -10,7 +10,7 @@ interface DesktopNavProps {
 }
 
 export const DesktopNav = ({ flexDir }: DesktopNavProps) => {
-  const { token, logout } = useApi();
+  const { token, logout, setModalOpen } = useApi();
 
   const router = useRouter();
 
@@ -38,18 +38,22 @@ export const DesktopNav = ({ flexDir }: DesktopNavProps) => {
       ) : (
         <>
           <Link
-            className={`btn-medium ${flexDir ? "w-4/5" : ""} btn-brand-opacity text-center`}
+            className={`btn-medium ${
+              flexDir ? "w-4/5" : ""
+            } btn-brand-opacity text-center`}
             href="/login"
           >
             Login
           </Link>
-          <button
+          <Link
+            href={"/login"}
             className={`btn-medium ${
               flexDir ? "w-4/5" : ""
             }  btn-brand-outline-light`}
+            onClick={() => setModalOpen(true)}
           >
             Cadastrar
-          </button>
+          </Link>
         </>
       )}
     </section>
