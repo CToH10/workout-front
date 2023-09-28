@@ -17,7 +17,6 @@ export const LoginForm = () => {
   const { login } = useApi();
 
   const onSubmit = (data: TLogin) => {
-    // console.log(data);
 
     login(data);
   };
@@ -25,7 +24,7 @@ export const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center w-[80%] max-w-sm absolute position-center"
+      className="flex flex-col justify-center"
     >
       <Field
         label="Email"
