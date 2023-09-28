@@ -14,13 +14,10 @@ export const RegisterForm = () => {
     mode: "onBlur",
   });
 
-  //   const { registerUser } = useApi();
+  const { registerUser } = useApi();
 
   const onSubmit = (data: TRegister) => {
-    const { confirmPassword, ...rest } = data;
-
-    console.log(rest);
-    // registerUser(rest);
+    registerUser(data);
   };
 
   return (
