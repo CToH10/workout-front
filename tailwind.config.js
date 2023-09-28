@@ -65,6 +65,9 @@ module.exports = {
         white: "0 20px 13px rgb(250, 250, 250 , 0.07))",
       },
     },
+    minHeight: {
+      12: "3rem",
+    },
   },
   plugins: [],
 };

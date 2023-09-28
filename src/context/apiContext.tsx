@@ -7,7 +7,14 @@ import { api } from "@/service/api";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 import { toast } from "react-toastify";
 
 interface Props {
@@ -34,6 +41,26 @@ interface ApiProviderData {
   workoutByUserInfo: () => Promise<void>;
   workoutByUser: DailyWorkoutType[];
   registerUser: (registerData: TRegister) => Promise<void>;
+  modalOpen: boolean;
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  modalStyle: {
+    content: {
+      top: string;
+      left: string;
+      right: string;
+      bottom: string;
+      marginRight: string;
+      transform: string;
+      minWidth: string;
+      width: string;
+      maxWidth: string;
+      backgroundColor: string;
+      display: string;
+    };
+    overlay: {
+      backgroundColor: string;
+    };
+  };
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -49,6 +76,7 @@ export function ApiProvider({ children }: Props) {
   const [workoutByUser, setWorkoutByUser] = useState<Array<DailyWorkoutType>>(
     []
   );
+  const [modalOpen, setModalOpen] = useState(false);
 
   const router = useRouter();
 
@@ -137,7 +165,7 @@ export function ApiProvider({ children }: Props) {
     try {
       const { confirmPassword, ...userData } = registerData;
       await api.post("users", userData);
-      toast.success("Usuário criado com sucesso")
+      toast.success("Usuário criado com sucesso");
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(`${error.response?.data.message}`);
@@ -147,6 +175,28 @@ export function ApiProvider({ children }: Props) {
       }
     }
   };
+
+  const modalStyle = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      minWidth: "300px",
+      width: "80%",
+      maxWidth: "500px",
+      backgroundColor: "#0b0d0d",
+      display: "grid",
+      maxHeight: "91%",
+    },
+    overlay: {
+      backgroundColor: "#ffffff2d",
+      backdropFilter: "blur(4px)",
+    },
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -159,6 +209,9 @@ export function ApiProvider({ children }: Props) {
         workoutByUserInfo,
         workoutByUser,
         registerUser,
+        modalOpen,
+        setModalOpen,
+        modalStyle,
       }}
     >
       {children}

@@ -136,7 +136,7 @@ body {
 
   textarea,
   input {
-    @apply border-2 rounded outline-none pl-4 h-12 bg-grey-1 border-brand-4;
+    @apply border-2 rounded outline-none pl-4 h-12 min-h-12 bg-grey-1 border-brand-4;
   }
 
   textarea::placeholder,
@@ -159,11 +159,11 @@ body {
   }
 
   select {
-    @apply rounded border-2 border-grey-7 px-4 h-12  bg-grey-1;
+    @apply rounded border-2 border-grey-7 px-4 h-12  bg-grey-1 text-grey-3;
   }
 
   select:focus {
-    @apply bg-grey-4 border-brand-1 outline-none;
+    @apply bg-grey-4 border-brand-1 outline-none text-grey-0;
   }
 
   .filter-section {
