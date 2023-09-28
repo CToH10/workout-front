@@ -38,7 +38,7 @@ export const DesktopNav = ({ flexDir }: DesktopNavProps) => {
       ) : (
         <>
           <Link
-            className={`btn-medium ${flexDir ? "w-4/5" : ""} btn-brand-opacity`}
+            className={`btn-medium ${flexDir ? "w-4/5" : ""} btn-brand-opacity text-center`}
             href="/login"
           >
             Login

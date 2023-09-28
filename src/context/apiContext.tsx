@@ -16,6 +16,7 @@ interface ApiProviderData {
   login: (userData: any) => Promise<void>;
   logout: () => void;
   token: string | undefined;
+  protect: () => void;
   profileInfo: () => Promise<void>;
   userData:
     | {
@@ -87,6 +88,7 @@ export function ApiProvider({ children }: Props) {
     setToken(undefined);
     setUserId(undefined);
     setUserData(undefined);
+    router.push("/");
   };
 
   const profileInfo = async () => {
@@ -103,6 +105,12 @@ export function ApiProvider({ children }: Props) {
       } else {
         console.error(error);
       }
+    }
+  };
+
+  const protect = () => {
+    if (!token) {
+      router.push("/");
     }
   };
 
@@ -127,6 +135,7 @@ export function ApiProvider({ children }: Props) {
         login,
         logout,
         token,
+        protect,
         profileInfo,
         userData,
         workoutByUserInfo,
