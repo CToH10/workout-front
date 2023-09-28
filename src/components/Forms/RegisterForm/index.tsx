@@ -17,11 +17,10 @@ export const RegisterForm = () => {
   //   const { registerUser } = useApi();
 
   const onSubmit = (data: TRegister) => {
-    // registerUser(data);
     const { confirmPassword, ...rest } = data;
-    console.log(data);
 
     console.log(rest);
+    // registerUser(rest);
   };
 
   return (
@@ -43,13 +42,37 @@ export const RegisterForm = () => {
         register={register("email")}
         error={errors.email?.message}
       />
-      {/* <Field
-        label="Experiência de treino"
-        placeholder="Digite seu email"
-        id="trainingExp"
-        register={register("trainingExp")}
-        error={errors.trainingExp?.message}
-      /> */}
+      <div>
+        <label htmlFor="trainingExp" className="label">
+          Nível de experiência
+        </label>
+        <select
+          id="trainingExp"
+          {...register("trainingExp")}
+          className="w-full mb-8 mt-3"
+          aria-label="Selecionar nível de experiência"
+        >
+          <option value="">Escolha seu nível</option>
+          <optgroup label="Até 06 meses de experiência">
+            <option value="beg" aria-label="Iniciante">
+              Iniciante
+            </option>
+          </optgroup>
+          <optgroup label="De 06 meses a 02 anos de experiência">
+            <option value="int" aria-label="Intermediário">
+              Intermediário
+            </option>
+          </optgroup>
+          <optgroup label="Mais de 02 anos de experiência">
+            <option value="adv" aria-label="Avançado">
+              Avançado
+            </option>
+          </optgroup>
+          <option value="pro" aria-label="Profissional">
+            Profissional
+          </option>
+        </select>
+      </div>
       <Field
         type="password"
         label="Senha"

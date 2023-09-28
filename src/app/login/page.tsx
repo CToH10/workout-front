@@ -1,6 +1,5 @@
 "use client";
 import { LoginForm } from "@/components/Forms/LoginForm";
-import { RegisterForm } from "@/components/Forms/RegisterForm";
 
 export default function LoginPage() {
   return (
@@ -19,8 +18,7 @@ export default function LoginPage() {
             Cadastro
           </button>
         </div>
-        {/* <LoginForm /> */}
-        <RegisterForm />
+        <LoginForm />
       </main>
     </>
   );

@@ -18,7 +18,6 @@ export const registerSchema = z
       ctx.addIssue({
         code: "custom",
         message: "Password did not match",
-
         path: ["confirmPassword"],
       });
     }

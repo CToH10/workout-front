@@ -1,4 +1,3 @@
-import { type } from "os";
 import { ChangeEvent } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
