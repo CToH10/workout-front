@@ -13,7 +13,12 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-24 font-mono gap-8">
+      <div className="z-10 w-full max-w-5xl font-mono">
+        <p className="text-brand-3 hover:text-brand-2 hover:font-bold text-heading2 font-medium lg:w-4/6">
+          Um ótimo lugar para controlar sua progressão e maximizar seus ganhos
+        </p>
+      </div>
       <div className="z-10 w-full max-w-5xl justify-between font-mono text-sm lg:flex lg:flex-col lg:items-start">
         <h2 className="text-grey-10 text-heading4 font-bold mb-6">
           Exercícios
