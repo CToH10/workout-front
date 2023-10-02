@@ -9,12 +9,11 @@ export default function Home() {
 
   useEffect(() => {
     getAllExercises();
-    console.log(allExercises);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 font-mono gap-8">
-      <div className="z-10 w-full max-w-5xl font-mono">
+      <div className="relative z-0 w-full max-w-5xl font-mono">
         <p className="text-brand-3 hover:text-brand-2 hover:font-bold text-heading2 font-medium lg:w-4/6">
           Um ótimo lugar para controlar sua progressão e maximizar seus ganhos
         </p>
