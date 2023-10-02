@@ -14,8 +14,11 @@ export default function Home() {
   }, []);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <ul className="flex gap-1 flex-col relative z-0">
+      <div className="z-10 w-full max-w-5xl justify-between font-mono text-sm lg:flex lg:flex-col lg:items-start">
+        <h2 className="text-grey-10 text-heading4 font-bold mb-6">
+          Exercícios
+        </h2>
+        <ul className="flex gap-1 flex-col relative z-0 flex-wrap max-h-96 w-full">
           {allExercises?.map((muscle) => ExerciseCard(muscle))}
         </ul>
         {/* <input type="text" name="" id="" placeholder="Algum texto" />
