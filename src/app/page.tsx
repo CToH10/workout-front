@@ -3,9 +3,10 @@
 import { ExerciseCard } from "@/components/ExerciseCard";
 import { useApi } from "@/context/apiContext";
 import { useEffect } from "react";
+import { BiPlus } from "react-icons/bi";
 
 export default function Home() {
-  const { allExercises, getAllExercises } = useApi();
+  const { allExercises, getAllExercises, token } = useApi();
 
   useEffect(() => {
     getAllExercises();
@@ -19,9 +20,19 @@ export default function Home() {
         </p>
       </div>
       <div className="z-10 w-full max-w-5xl justify-between font-mono text-sm lg:flex lg:flex-col lg:items-start">
-        <h2 className="text-grey-10 text-heading4 font-bold mb-6">
-          Exercícios
-        </h2>
+        <div className="flex justify-between w-full items-center h-[60px] mb-6">
+          <h2 className="text-grey-10 text-heading4 font-bold">Exercícios</h2>
+          {token && (
+            <button
+              className="btn-success btn-small h-[50%]"
+              onClick={() => {
+                console.log("click");
+              }}
+            >
+              {<BiPlus />}
+            </button>
+          )}
+        </div>
         <ul className="flex gap-1 flex-col relative z-0 flex-wrap max-h-96 w-full">
           {allExercises?.map((muscle) => ExerciseCard(muscle))}
         </ul>
