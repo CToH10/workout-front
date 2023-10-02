@@ -4,6 +4,7 @@ import { DailyWorkoutType } from "@/@types/dailyWorkout";
 import { TLogin } from "@/schemas/loginSchema";
 import { TRegister } from "@/schemas/registerSchema";
 import { api } from "@/service/api";
+import { TAllExercises, TModalStyle, TUserData } from "@/utils/interfaces";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
@@ -22,45 +23,20 @@ interface Props {
 }
 
 interface ApiProviderData {
-  login: (userData: any) => Promise<void>;
+  login: (userData: TLogin) => Promise<void>;
   logout: () => void;
   token: string | undefined;
   protect: () => void;
   profileInfo: () => Promise<void>;
-  userData:
-    | {
-        name: string;
-        email: string;
-        trainingExp: string;
-        id: number;
-        createdAt: string;
-        updatedAt: string;
-        deletedAt: null | string;
-      }
-    | undefined;
+  userData: TUserData;
   workoutByUserInfo: () => Promise<void>;
   workoutByUser: DailyWorkoutType[];
   registerUser: (registerData: TRegister) => Promise<void>;
   modalOpen: boolean;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
-  modalStyle: {
-    content: {
-      top: string;
-      left: string;
-      right: string;
-      bottom: string;
-      marginRight: string;
-      transform: string;
-      minWidth: string;
-      width: string;
-      maxWidth: string;
-      backgroundColor: string;
-      display: string;
-    };
-    overlay: {
-      backgroundColor: string;
-    };
-  };
+  modalStyle: TModalStyle;
+  allExercises: TAllExercises | undefined;
+  getAllExercises: () => Promise<TAllExercises | void>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -77,6 +53,7 @@ export function ApiProvider({ children }: Props) {
     []
   );
   const [modalOpen, setModalOpen] = useState(false);
+  const [allExercises, setAllExercises] = useState<TAllExercises>();
 
   const router = useRouter();
 
@@ -197,6 +174,21 @@ export function ApiProvider({ children }: Props) {
     },
   };
 
+  const getAllExercises = async (): Promise<TAllExercises | void> => {
+    try {
+      const list = await api.get("exercises");
+      setAllExercises(list.data);
+
+      return list.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
   return (
     <ApiContext.Provider
       value={{
@@ -212,6 +204,8 @@ export function ApiProvider({ children }: Props) {
         modalOpen,
         setModalOpen,
         modalStyle,
+        allExercises,
+        getAllExercises,
       }}
     >
       {children}
