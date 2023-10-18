@@ -1,6 +1,7 @@
 "use client";
 
 import { DailyWorkoutType } from "@/@types/dailyWorkout";
+import { TCreateWorkout } from "@/schemas/createWorkoutSchema";
 import { TLogin } from "@/schemas/loginSchema";
 import { TRegister } from "@/schemas/registerSchema";
 import { api } from "@/service/api";
@@ -45,6 +46,12 @@ interface ApiProviderData {
   allMuscleGroups: MuscleGroupListType | undefined;
   listMuscleGroups: () => Promise<void>;
   buildPageLists: () => Promise<void>;
+  listByMuscleGroup: (muscleGroupId: number) => Promise<any>;
+  createWorkout: () => Promise<number | undefined>;
+  addExerciseToWorkout: (
+    workoutId: number,
+    data: TCreateWorkout
+  ) => Promise<void>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -201,7 +208,7 @@ export function ApiProvider({ children }: Props) {
 
   const createWorkout = async () => {
     try {
-      const newWorkout = await api.post("workout", headers);
+      const newWorkout = await api.post("workout", {}, headers);
 
       return +newWorkout.data.id;
     } catch (error) {
@@ -233,6 +240,39 @@ export function ApiProvider({ children }: Props) {
     await getAllExercises();
   };
 
+  const listByMuscleGroup = async (muscleGroupId: number) => {
+    try {
+      const exerciseByMuscle = (await api.get(`exercises/${muscleGroupId}`))
+        .data;
+
+      return exerciseByMuscle;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
+  const addExerciseToWorkout = async (
+    workoutId: number,
+    data: TCreateWorkout
+  ) => {
+    try {
+      await api.post(`workout/${workoutId}`, data, headers);
+      toast.success("Exercício adicionado com sucesso");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -253,6 +293,9 @@ export function ApiProvider({ children }: Props) {
         allMuscleGroups,
         listMuscleGroups,
         buildPageLists,
+        listByMuscleGroup,
+        createWorkout,
+        addExerciseToWorkout,
       }}
     >
       {children}

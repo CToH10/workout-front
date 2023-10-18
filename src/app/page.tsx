@@ -1,5 +1,6 @@
 "use client";
 import { ExerciseCard } from "@/components/ExerciseCard";
+import { CreateWorkoutForm } from "@/components/Forms/CreateWorkoutForm";
 import { useApi } from "@/context/apiContext";
 import { useEffect } from "react";
 import { BiPlus } from "react-icons/bi";
@@ -13,7 +14,6 @@ export default function Home() {
     setModalOpen,
     modalStyle,
     buildPageLists,
-    allMuscleGroups,
   } = useApi();
 
   useEffect(() => {
@@ -56,11 +56,7 @@ export default function Home() {
             >
               Fechar
             </button>
-            <select name="" id="">
-              {allMuscleGroups!.map(
-                (muscleGroup: { name: string }) => muscleGroup.name
-              )}
-            </select>
+            <CreateWorkoutForm />
           </Modal>
         </div>
       )}
