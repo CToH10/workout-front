@@ -19,19 +19,24 @@ export default function Home() {
           Um ótimo lugar para controlar sua progressão e maximizar seus ganhos
         </p>
       </div>
+      {token && (
+        <div className="w-full max-w-5xl flex flex-col gap-4 lg:flex-row justify-between items-center">
+          <h3 className="font-mono text-brand-4 font-semibold text-heading5">Adicionar sessão de treino</h3>
+          <button
+            className="btn-success btn-small h-[50%] w-1/2 max-w-[120px]"
+            onClick={() => {
+              console.log("click");
+            }}
+          >
+            {<BiPlus className="inline"/>}
+          </button>
+        </div>
+      )}
       <div className="z-10 w-full max-w-5xl justify-between font-mono text-sm lg:flex lg:flex-col lg:items-start">
         <div className="flex justify-between w-full items-center h-[60px] mb-6">
-          <h2 className="text-grey-10 text-heading4 font-bold">Sugestão de exercícios</h2>
-          {token && (
-            <button
-              className="btn-success btn-small h-[50%]"
-              onClick={() => {
-                console.log("click");
-              }}
-            >
-              {<BiPlus />}
-            </button>
-          )}
+          <h2 className="text-grey-10 text-heading4 font-bold">
+            Sugestão de exercícios
+          </h2>
         </div>
         <ul className="flex gap-1 flex-col relative z-0 flex-wrap max-h-96 w-full">
           {allExercises?.map((muscle) => ExerciseCard(muscle))}
