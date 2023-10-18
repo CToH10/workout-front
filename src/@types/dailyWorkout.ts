@@ -15,3 +15,16 @@ export interface DailyWorkoutType {
   id: number;
   userId: number;
 }
+
+export interface MuscleGroupListType {
+  name: string;
+  id: number;
+  exercises: [
+    {
+      id: number;
+      name: string;
+      muscleId: number;
+      description: string | null;
+    } | null
+  ];
+}

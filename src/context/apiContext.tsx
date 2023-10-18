@@ -1,6 +1,6 @@
 "use client";
 
-import { DailyWorkoutType } from "@/@types/dailyWorkout";
+import { DailyWorkoutType, MuscleGroupListType } from "@/@types/dailyWorkout";
 import { TLogin } from "@/schemas/loginSchema";
 import { TRegister } from "@/schemas/registerSchema";
 import { api } from "@/service/api";
@@ -37,6 +37,7 @@ interface ApiProviderData {
   modalStyle: TModalStyle;
   allExercises: TAllExercises | undefined;
   getAllExercises: () => Promise<TAllExercises | void>;
+  allMuscleGroups: MuscleGroupListType | undefined;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -54,6 +55,7 @@ export function ApiProvider({ children }: Props) {
   );
   const [modalOpen, setModalOpen] = useState(false);
   const [allExercises, setAllExercises] = useState<TAllExercises>();
+  const [allMuscleGroups, setMuscleGroups] = useState<MuscleGroupListType>();
 
   const router = useRouter();
 
@@ -205,6 +207,20 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
+  const listMuscleGroups = async () => {
+    try {
+      const groupsList = await api.get("muscles");
+      setMuscleGroups(groupsList.data);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -222,6 +238,7 @@ export function ApiProvider({ children }: Props) {
         modalStyle,
         allExercises,
         getAllExercises,
+        allMuscleGroups,
       }}
     >
       {children}
