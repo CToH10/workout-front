@@ -53,19 +53,10 @@ export default function Home() {
             >
               Fechar
             </button>
-            <form className="provisory">
-              <input type="text" name="" id="" className="provisoryInput" />
-              <input type="text" name="" id="" className="provisoryInput" />
-              <input type="text" name="" id="" className="provisoryInput" />
-              <input type="text" name="" id="" className="provisoryInput" />
-              <input type="text" name="" id="" className="provisoryInput" />
-              <input type="text" name="" id="" className="provisoryInput" />
-              <input type="text" name="" id="" className="provisoryInput" />
-            </form>
           </Modal>
         </div>
       )}
-      <div className="z-10 w-full max-w-5xl justify-between font-mono text-sm lg:flex lg:flex-col lg:items-start">
+      <div className="w-full max-w-5xl justify-between font-mono text-sm lg:flex lg:flex-col lg:items-start">
         <div className="flex justify-between w-full items-center h-[60px] mb-6">
           <h2 className="text-grey-10 text-heading4 font-bold">
             Sugestão de exercícios
