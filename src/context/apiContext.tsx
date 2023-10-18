@@ -189,6 +189,22 @@ export function ApiProvider({ children }: Props) {
       }
     }
   };
+
+  const createWorkout = async () => {
+    try {
+      const newWorkout = await api.post("workout", headers);
+
+      return +newWorkout.data.id;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{

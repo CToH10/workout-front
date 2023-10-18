@@ -1,12 +1,19 @@
 "use client";
-
 import { ExerciseCard } from "@/components/ExerciseCard";
 import { useApi } from "@/context/apiContext";
 import { useEffect } from "react";
 import { BiPlus } from "react-icons/bi";
+import Modal from "react-modal";
 
 export default function Home() {
-  const { allExercises, getAllExercises, token } = useApi();
+  const {
+    allExercises,
+    getAllExercises,
+    token,
+    modalOpen,
+    setModalOpen,
+    modalStyle,
+  } = useApi();
 
   useEffect(() => {
     getAllExercises();
@@ -21,15 +28,41 @@ export default function Home() {
       </div>
       {token && (
         <div className="w-full max-w-5xl flex flex-col gap-4 lg:flex-row justify-between items-center">
-          <h3 className="font-mono text-brand-4 font-semibold text-heading5">Adicionar sessão de treino</h3>
+          <h3 className="font-mono text-brand-4 font-semibold text-heading5">
+            Adicionar sessão de treino
+          </h3>
           <button
             className="btn-success btn-small h-[50%] w-1/2 max-w-[120px]"
             onClick={() => {
-              console.log("click");
+              setModalOpen(true);
             }}
           >
-            {<BiPlus className="inline"/>}
+            {<BiPlus className="inline" />}
           </button>
+          <Modal
+            isOpen={modalOpen}
+            style={modalStyle}
+            contentLabel="Formulário de cadastro"
+            shouldCloseOnOverlayClick={true}
+            shouldCloseOnEsc={true}
+            parentSelector={() => document.body}
+          >
+            <button
+              onClick={() => setModalOpen(!modalOpen)}
+              className="btn-small btn-brand1 mb-8"
+            >
+              Fechar
+            </button>
+            <form className="provisory">
+              <input type="text" name="" id="" className="provisoryInput" />
+              <input type="text" name="" id="" className="provisoryInput" />
+              <input type="text" name="" id="" className="provisoryInput" />
+              <input type="text" name="" id="" className="provisoryInput" />
+              <input type="text" name="" id="" className="provisoryInput" />
+              <input type="text" name="" id="" className="provisoryInput" />
+              <input type="text" name="" id="" className="provisoryInput" />
+            </form>
+          </Modal>
         </div>
       )}
       <div className="z-10 w-full max-w-5xl justify-between font-mono text-sm lg:flex lg:flex-col lg:items-start">
