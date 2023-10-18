@@ -1,10 +1,15 @@
 "use client";
 
-import { DailyWorkoutType, MuscleGroupListType } from "@/@types/dailyWorkout";
+import { DailyWorkoutType } from "@/@types/dailyWorkout";
 import { TLogin } from "@/schemas/loginSchema";
 import { TRegister } from "@/schemas/registerSchema";
 import { api } from "@/service/api";
-import { TAllExercises, TModalStyle, TUserData } from "@/utils/interfaces";
+import {
+  MuscleGroupListType,
+  TAllExercises,
+  TModalStyle,
+  TUserData,
+} from "@/utils/interfaces";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
@@ -38,6 +43,8 @@ interface ApiProviderData {
   allExercises: TAllExercises | undefined;
   getAllExercises: () => Promise<TAllExercises | void>;
   allMuscleGroups: MuscleGroupListType | undefined;
+  listMuscleGroups: () => Promise<void>;
+  buildPageLists: () => Promise<void>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -221,6 +228,11 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
+  const buildPageLists = async () => {
+    await listMuscleGroups();
+    await getAllExercises();
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -239,6 +251,8 @@ export function ApiProvider({ children }: Props) {
         allExercises,
         getAllExercises,
         allMuscleGroups,
+        listMuscleGroups,
+        buildPageLists,
       }}
     >
       {children}

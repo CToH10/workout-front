@@ -8,15 +8,16 @@ import Modal from "react-modal";
 export default function Home() {
   const {
     allExercises,
-    getAllExercises,
     token,
     modalOpen,
     setModalOpen,
     modalStyle,
+    buildPageLists,
+    allMuscleGroups,
   } = useApi();
 
   useEffect(() => {
-    getAllExercises();
+    buildPageLists();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -48,11 +49,18 @@ export default function Home() {
             parentSelector={() => document.body}
           >
             <button
-              onClick={() => setModalOpen(!modalOpen)}
+              onClick={() => {
+                setModalOpen(!modalOpen);
+              }}
               className="btn-small btn-brand1 mb-8"
             >
               Fechar
             </button>
+            <select name="" id="">
+              {allMuscleGroups!.map(
+                (muscleGroup: { name: string }) => muscleGroup.name
+              )}
+            </select>
           </Modal>
         </div>
       )}

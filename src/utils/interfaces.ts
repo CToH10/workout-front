@@ -39,3 +39,18 @@ export type TAllExercises = [
     };
   }
 ];
+
+export type MuscleGroupListType = [MuscleGroupType];
+
+export interface MuscleGroupType {
+  name: string;
+  id: number;
+  exercises: [
+    {
+      id: number;
+      name: string;
+      muscleId: number;
+      description: string | null;
+    } | null
+  ];
+}
