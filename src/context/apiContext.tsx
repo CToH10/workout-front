@@ -187,6 +187,7 @@ export function ApiProvider({ children }: Props) {
     overlay: {
       backgroundColor: "#ffffff2d",
       backdropFilter: "blur(4px)",
+      zIndex: "100",
     },
   };
 
@@ -263,6 +264,19 @@ export function ApiProvider({ children }: Props) {
     try {
       await api.post(`workout/${workoutId}`, data, headers);
       toast.success("Exercício adicionado com sucesso");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
+  const editProfile = async () => {
+    try {
+      await api.patch(`users/${userId}`, "", headers);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(`${error.response?.data.message}`);
