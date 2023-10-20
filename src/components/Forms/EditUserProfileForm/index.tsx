@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { useApi } from "@/context/apiContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Field } from "@/components/Field";
@@ -7,6 +6,27 @@ import { useForm } from "react-hook-form";
 import { TUpdateUser, updateUserSchema } from "@/schemas/registerSchema";
 
 export const EditUserProfileForm = () => {
+  const { editProfile, userData } = useApi();
+
+  let experience: "beg" | "int" | "adv" | "pro" | undefined;
+
+  switch (userData?.trainingExp) {
+    case "beg":
+      experience = "beg";
+      break;
+    case "int":
+      experience = "int";
+      break;
+    case "adv":
+      experience = "adv";
+      break;
+    case "pro":
+      experience = "pro";
+      break;
+    default:
+      experience = undefined;
+  }
+
   const {
     handleSubmit,
     register,
@@ -14,18 +34,23 @@ export const EditUserProfileForm = () => {
   } = useForm<TUpdateUser>({
     resolver: zodResolver(updateUserSchema),
     mode: "onBlur",
+    defaultValues: {
+      name: userData?.name,
+      email: userData?.email,
+      trainingExp: experience,
+    },
   });
 
-  const { editProfile } = useApi();
-
   const onSubmit = (data: any) => {
-    console.log(data);
+    editProfile(data);
+
+    // console.log(data);
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center gap-5"
+      className="flex flex-col justify-center text-heading7 "
     >
       <Field
         label="Nome de usuário"
@@ -50,6 +75,7 @@ export const EditUserProfileForm = () => {
           {...register("trainingExp")}
           className="w-full mb-8 mt-3"
           aria-label="Selecionar nível de experiência"
+          disabled
         >
           <option value="">Escolha seu nível</option>
           <optgroup label="Até 06 meses de experiência">

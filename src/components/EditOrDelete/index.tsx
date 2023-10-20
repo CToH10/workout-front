@@ -3,6 +3,7 @@ import { FaPen, FaTrash } from "react-icons/fa";
 import { useApi } from "@/context/apiContext";
 import Modal from "react-modal";
 import { useState } from "react";
+import { EditUserProfileForm } from "../Forms/EditUserProfileForm";
 
 interface EditOrDeleteProps {
   className: string;
@@ -49,7 +50,13 @@ export const EditOrDelete = ({ className }: EditOrDeleteProps) => {
         >
           Fechar
         </button>
-        <p className="text-grey-9 text-heading1">{formToOpen}</p>
+        <p className="text-grey-9 text-heading1">
+          {formToOpen === "delete" ? (
+            "formulário de deletar"
+          ) : (
+            <EditUserProfileForm />
+          )}
+        </p>
       </Modal>
     </section>
   );

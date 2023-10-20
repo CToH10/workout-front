@@ -52,7 +52,7 @@ interface ApiProviderData {
     workoutId: number,
     data: TCreateWorkout
   ) => Promise<void>;
-  editProfile: () => Promise<void>;
+  editProfile: (data: any) => Promise<void>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -275,9 +275,21 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
-  const editProfile = async () => {
+  const editProfile = async (data: any) => {
     try {
-      await api.patch(`users/${userId}`, "", headers);
+      if (data.password === "") {
+        delete data.password;
+      }
+      delete data.trainingExp;
+
+      console.log(data);
+
+      // await api.patch(`users/${userId}`, data, headers);
+
+      // await profileInfo();
+
+      setModalOpen(false);
+      toast.success("Perfil editado com sucesso");
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(`${error.response?.data.message}`);

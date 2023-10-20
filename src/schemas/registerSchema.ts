@@ -23,4 +23,15 @@ export const registerSchema = z
     }
   });
 
+export const updateUserSchema = z.object({
+  password: z.optional(
+    z.string().min(10).regex(strongPassword, passwordMessage).or(z.literal(""))
+  ),
+  name: z.string().max(50).optional(),
+  email: z.string().max(50).email().optional(),
+  trainingExp: z.enum(["beg", "int", "adv", "pro"]).optional(),
+});
+
 export type TRegister = z.infer<typeof registerSchema>;
+
+export type TUpdateUser = z.infer<typeof updateUserSchema>;
