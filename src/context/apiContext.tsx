@@ -3,7 +3,7 @@
 import { DailyWorkoutType } from "@/@types/dailyWorkout";
 import { TCreateWorkout } from "@/schemas/createWorkoutSchema";
 import { TLogin } from "@/schemas/loginSchema";
-import { TRegister } from "@/schemas/registerSchema";
+import { TRegister, TUpdateUser } from "@/schemas/registerSchema";
 import { api } from "@/service/api";
 import {
   MuscleGroupListType,
@@ -52,7 +52,7 @@ interface ApiProviderData {
     workoutId: number,
     data: TCreateWorkout
   ) => Promise<void>;
-  editProfile: (data: any) => Promise<void>;
+  editProfile: (data: TUpdateUser) => Promise<void>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -275,18 +275,16 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
-  const editProfile = async (data: any) => {
+  const editProfile = async (data: TUpdateUser) => {
     try {
       if (data.password === "") {
         delete data.password;
       }
       delete data.trainingExp;
 
-      console.log(data);
+      await api.patch(`users/${userId}`, data, headers);
 
-      // await api.patch(`users/${userId}`, data, headers);
-
-      // await profileInfo();
+      await profileInfo();
 
       setModalOpen(false);
       toast.success("Perfil editado com sucesso");
