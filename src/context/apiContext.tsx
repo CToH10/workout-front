@@ -52,6 +52,7 @@ interface ApiProviderData {
     workoutId: number,
     data: TCreateWorkout
   ) => Promise<void>;
+  editProfile: () => Promise<void>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -310,6 +311,7 @@ export function ApiProvider({ children }: Props) {
         listByMuscleGroup,
         createWorkout,
         addExerciseToWorkout,
+        editProfile,
       }}
     >
       {children}

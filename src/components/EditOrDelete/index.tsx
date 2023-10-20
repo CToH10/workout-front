@@ -1,15 +1,17 @@
+"use client";
 import { FaPen, FaTrash } from "react-icons/fa";
+import { useApi } from "@/context/apiContext";
+import Modal from "react-modal";
+import { useState } from "react";
+
 interface EditOrDeleteProps {
   className: string;
-  editProfileFunction: any;
-  deleteProfileFunction: any;
 }
+type IFormToOpen = "edit" | "delete";
 
-export const EditOrDelete = ({
-  className,
-  deleteProfileFunction,
-  editProfileFunction,
-}: EditOrDeleteProps) => {
+export const EditOrDelete = ({ className }: EditOrDeleteProps) => {
+  const { modalOpen, modalStyle, setModalOpen } = useApi();
+  const [formToOpen, setFormToOpen] = useState<IFormToOpen>("edit");
   return (
     <section
       className={`${className} flex justify-between items-center w-[150px] gap-2`}
@@ -17,7 +19,8 @@ export const EditOrDelete = ({
       <button
         className="btn-medium btn-brand-opacity"
         onClick={() => {
-          editProfileFunction();
+          setFormToOpen("edit");
+          setModalOpen(true);
         }}
       >
         <FaPen />
@@ -25,11 +28,29 @@ export const EditOrDelete = ({
       <button
         className="btn-medium btn-alert"
         onClick={() => {
-          deleteProfileFunction();
+          setFormToOpen("delete");
+          setModalOpen(true);
         }}
       >
         <FaTrash />
       </button>
+      <Modal
+        isOpen={modalOpen}
+        style={modalStyle}
+        shouldCloseOnEsc={true}
+        shouldCloseOnOverlayClick={true}
+        parentSelector={() => document.body}
+      >
+        <button
+          onClick={() => {
+            setModalOpen(!modalOpen);
+          }}
+          className="btn-small btn-brand1 mb-8"
+        >
+          Fechar
+        </button>
+        <p className="text-grey-9 text-heading1">{formToOpen}</p>
+      </Modal>
     </section>
   );
 };

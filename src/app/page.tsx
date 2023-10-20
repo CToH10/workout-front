@@ -43,7 +43,7 @@ export default function Home() {
           <Modal
             isOpen={modalOpen}
             style={modalStyle}
-            contentLabel="Formulário de cadastro"
+            contentLabel="Novo treino"
             shouldCloseOnOverlayClick={true}
             shouldCloseOnEsc={true}
             parentSelector={() => document.body}
