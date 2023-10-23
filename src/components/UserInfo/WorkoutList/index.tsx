@@ -13,15 +13,17 @@ export const WorkoutList = ({ className }: WorkoutListProps) => {
   return (
     <section className={className}>
       <p className="text-heading2 text-grey-7 font-bold">Treinos</p>
-      <ul>
+      <ul className="lg:flex lg:flex-wrap gap-2 max-w-[850px] overflow-auto">
         {workoutByUser.map((workout) => {
-          return (
-            <li key={workout.id} className="mb-3">
+          return workout.daily_exercise.length > 0 ? (
+            <li key={workout.id} className="mb-3 max-w-[250px] min-w-[250px] max-h-[268px] overflow-auto">
               <p className="text-heading3 text-grey-9 font-semibold">
                 {getWorkoutDate(workout.date)}
               </p>
               <DailyExerciseList daily_workout={workout.daily_exercise} />
             </li>
+          ) : (
+            <></>
           );
         })}
       </ul>
