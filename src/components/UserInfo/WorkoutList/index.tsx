@@ -4,6 +4,7 @@ import { useApi } from "@/context/apiContext";
 import { DailyExerciseList } from "./DailyExercise";
 import { getWorkoutDate } from "@/utils/workoutDate";
 import { FaPen, FaTrash } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 interface WorkoutListProps {
   className: string;
@@ -11,6 +12,9 @@ interface WorkoutListProps {
 
 export const WorkoutList = ({ className }: WorkoutListProps) => {
   const { workoutByUser, deleteWorkout } = useApi();
+
+  const router = useRouter();
+
   return (
     <section className={className}>
       <p className="text-heading2 text-grey-7 font-bold">Treinos</p>
@@ -28,8 +32,8 @@ export const WorkoutList = ({ className }: WorkoutListProps) => {
                 <section className="max-w-[35%] min-w-[35%] flex justify-between">
                   <button
                     className="btn-small btn-brand-opacity"
-                    onClick={(e) => {
-                      console.log(e.currentTarget);
+                    onClick={() => {
+                      router.push(`workout/${workout.id}`);
                     }}
                   >
                     <FaPen />
