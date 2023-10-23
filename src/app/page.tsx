@@ -66,26 +66,9 @@ export default function Home() {
             Sugestão de exercícios
           </h2>
         </div>
-        <ul className="flex gap-1 flex-col relative z-0 flex-wrap max-h-96 w-full">
+        <ul className="flex gap-1 flex-col relative z-0 lg:flex-wrap max-h-96 w-full overflow-auto scrollbar">
           {allExercises?.map((muscle) => ExerciseCard(muscle))}
         </ul>
-        {/* <input type="text" name="" id="" placeholder="Algum texto" />
-        <input type="date" name="" id="" />
-        <input type="number" name="" id="" />
-        <select name="" id="">
-          <option value="">Opção</option>
-          <option value="">Opção</option>
-          <option value="">Opção</option>
-        </select>
-      </div>
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <button className="btn-medium btn-grey-light">Botão</button>
-        <button className="btn-small btn-brand1">Botão</button>
-        <button className="btn-big btn-brand-opacity">Botão</button>
-        <button className="btn-big btn-light">Botão</button>
-        <button className="btn-big btn-brand-outline-light">Botão</button>
-        <button className="btn-big btn-alert">Botão</button>
-        <button className="btn-big btn-success">Botão</button> */}
       </div>
     </main>
   );

@@ -202,13 +202,13 @@ body {
 
   .scrollbar::-webkit-scrollbar-track {
     border-radius: 100vh;
-    @apply bg-grey-whiteFixed;
+    @apply bg-grey-0;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
     @apply bg-brand-1;
     border-radius: 100vh;
-    border: 3px solid #fff;
+    border: 3px solid #000;
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
