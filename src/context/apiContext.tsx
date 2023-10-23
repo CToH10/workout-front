@@ -55,6 +55,8 @@ interface ApiProviderData {
   editProfile: (data: TUpdateUser) => Promise<void>;
   deleteProfile: () => Promise<void>;
   deleteWorkout: (workoutId: number) => Promise<void>;
+  workoutById: (workoutId: number) => Promise<void>;
+  workoutToPage: DailyWorkoutType | undefined;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -73,6 +75,7 @@ export function ApiProvider({ children }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [allExercises, setAllExercises] = useState<TAllExercises>();
   const [allMuscleGroups, setMuscleGroups] = useState<MuscleGroupListType>();
+  const [workoutToPage, setWorkoutToPage] = useState<DailyWorkoutType>();
 
   const router = useRouter();
 
@@ -337,6 +340,23 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
+  const workoutById = async (workoutId: number) => {
+    try {
+      const workoutInfo = await (
+        await api.get(`workout/${workoutId}`, headers)
+      ).data;
+
+      setWorkoutToPage(workoutInfo);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -363,6 +383,8 @@ export function ApiProvider({ children }: Props) {
         editProfile,
         deleteProfile,
         deleteWorkout,
+        workoutById,
+        workoutToPage,
       }}
     >
       {children}
