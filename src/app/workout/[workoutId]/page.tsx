@@ -23,7 +23,7 @@ export default function EditWorkout({
       <h1 className="text-heading1 text-grey-10">
         {getWorkoutDate(workoutToPage?.date!)}
       </h1>
-      <ul>
+      <ul className="flex flex-wrap gap-6">
         {workoutToPage?.daily_exercise.map((workout) => {
           return (
             <li key={workout.exercise.id}>
