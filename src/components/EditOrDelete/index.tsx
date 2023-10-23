@@ -4,6 +4,7 @@ import { useApi } from "@/context/apiContext";
 import Modal from "react-modal";
 import { useState } from "react";
 import { EditUserProfileForm } from "../Forms/EditUserProfileForm";
+import { DeleteProfileForm } from "../Forms/DeleteProfileForm";
 
 interface EditOrDeleteProps {
   className: string;
@@ -52,7 +53,7 @@ export const EditOrDelete = ({ className }: EditOrDeleteProps) => {
         </button>
         <p className="text-grey-9 text-heading1">
           {formToOpen === "delete" ? (
-            "formulário de deletar"
+            <DeleteProfileForm />
           ) : (
             <EditUserProfileForm />
           )}

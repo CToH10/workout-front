@@ -53,6 +53,7 @@ interface ApiProviderData {
     data: TCreateWorkout
   ) => Promise<void>;
   editProfile: (data: TUpdateUser) => Promise<void>;
+  deleteProfile: () => Promise<void>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -160,6 +161,7 @@ export function ApiProvider({ children }: Props) {
       const { confirmPassword, ...userData } = registerData;
       await api.post("users", userData);
       toast.success("Usuário criado com sucesso");
+      setModalOpen(false);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(`${error.response?.data.message}`);
@@ -298,6 +300,26 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
+  const deleteProfile = async () => {
+    try {
+      await api.delete(`users/${userId}`, headers);
+
+      destroyCookie(null, "workoutManager.token");
+      destroyCookie(null, "workoutManager.id");
+      setToken(undefined);
+      setUserId(undefined);
+      setUserData(undefined);
+      router.push("/");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -322,6 +344,7 @@ export function ApiProvider({ children }: Props) {
         createWorkout,
         addExerciseToWorkout,
         editProfile,
+        deleteProfile,
       }}
     >
       {children}
