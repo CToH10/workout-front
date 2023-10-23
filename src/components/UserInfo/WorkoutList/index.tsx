@@ -13,10 +13,10 @@ export const WorkoutList = ({ className }: WorkoutListProps) => {
   return (
     <section className={className}>
       <p className="text-heading2 text-grey-7 font-bold">Treinos</p>
-      <ul className="lg:flex lg:flex-wrap gap-2 max-w-[850px] overflow-auto">
+      <ul className="lg:flex lg:flex-wrap gap-2 max-w-[850px] overflow-auto lg:max-w-[100%] lg:gap-x-2">
         {workoutByUser.map((workout) => {
           return workout.daily_exercise.length > 0 ? (
-            <li key={workout.id} className="mb-3 max-w-[250px] min-w-[250px] max-h-[268px] overflow-auto">
+            <li key={workout.id} className="mb-3 max-w-[250px] min-w-[250px] max-h-[268px] overflow-auto lg:max-w-[270px] lg:min-w-[270px]">
               <p className="text-heading3 text-grey-9 font-semibold">
                 {getWorkoutDate(workout.date)}
               </p>
