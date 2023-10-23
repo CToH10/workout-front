@@ -173,6 +173,10 @@ body {
   .filter-input {
     @apply bg-grey-2 placeholder:heading-7-600 max-w-[44%] px-8 py-2;
   }
+
+  .exercise-card {
+    @apply border-brand-1 bg-brand-3 border-2 px-8 py-4 rounded-3xl;
+  }
 }
 
 @layer utilities {
