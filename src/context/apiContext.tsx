@@ -54,6 +54,7 @@ interface ApiProviderData {
   ) => Promise<void>;
   editProfile: (data: TUpdateUser) => Promise<void>;
   deleteProfile: () => Promise<void>;
+  deleteWorkout: (workoutId: number) => Promise<void>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -320,6 +321,22 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
+  const deleteWorkout = async (workoutId: number) => {
+    try {
+      await api.delete(`workout/${workoutId}`, headers);
+
+      await workoutByUserInfo();
+      toast.success("Treino excluído");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -345,6 +362,7 @@ export function ApiProvider({ children }: Props) {
         addExerciseToWorkout,
         editProfile,
         deleteProfile,
+        deleteWorkout,
       }}
     >
       {children}
