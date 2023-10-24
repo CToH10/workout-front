@@ -18,7 +18,7 @@ export const WorkoutList = ({ className }: WorkoutListProps) => {
   return (
     <section className={className}>
       <p className="text-heading2 text-grey-7 font-bold">Treinos</p>
-      <ul className="lg:flex lg:flex-wrap gap-2 max-w-[850px] overflow-auto lg:max-w-[100%] lg:gap-x-2">
+      <ul className="lg:grid-cols-3 lg:grid md:grid md:grid-cols-2 gap-2 max-w-[850px] overflow-auto lg:max-w-[100%] lg:gap-x-2 scrollbar">
         {workoutByUser.map((workout) => {
           return workout.daily_exercise.length > 0 ? (
             <li
