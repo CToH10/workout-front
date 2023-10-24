@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Field } from "@/components/Field";
 import { useApi } from "@/context/apiContext";
-import { TRegister, registerSchema } from "@/schemas/registerSchema";
+import { TRegister, registerSchema } from "@/schemas/userProfileSchemas";
 
 export const RegisterForm = () => {
   const {

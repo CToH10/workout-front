@@ -6,7 +6,7 @@ import { useApi } from "@/context/apiContext";
 import {
   TCreateWorkout,
   createWorkoutSchema,
-} from "@/schemas/createWorkoutSchema";
+} from "@/schemas/workoutSchemas";
 import { MuscleGroupType } from "@/utils/interfaces";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";

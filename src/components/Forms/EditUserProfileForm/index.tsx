@@ -3,7 +3,7 @@ import { useApi } from "@/context/apiContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Field } from "@/components/Field";
 import { useForm } from "react-hook-form";
-import { TUpdateUser, updateUserSchema } from "@/schemas/registerSchema";
+import { TUpdateUser, updateUserSchema } from "@/schemas/userProfileSchemas";
 
 export const EditUserProfileForm = () => {
   const { editProfile, userData } = useApi();
