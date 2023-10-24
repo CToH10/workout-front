@@ -1,9 +1,9 @@
 "use client";
 
 import { DailyWorkoutType } from "@/@types/dailyWorkout";
-import { TCreateWorkout } from "@/schemas/createWorkoutSchema";
+import { TCreateWorkout } from "@/schemas/workoutSchemas";
 import { TLogin } from "@/schemas/loginSchema";
-import { TRegister, TUpdateUser } from "@/schemas/registerSchema";
+import { TRegister, TUpdateUser } from "@/schemas/userProfileSchemas";
 import { api } from "@/service/api";
 import {
   MuscleGroupListType,

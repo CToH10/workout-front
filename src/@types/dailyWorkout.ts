@@ -7,7 +7,7 @@ export interface DailyExerciseType {
   series: number;
   totalLoad: number;
   weight: number;
-  
+  id: number;
 }
 
 export interface DailyWorkoutType {
