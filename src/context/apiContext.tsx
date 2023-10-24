@@ -1,7 +1,7 @@
 "use client";
 
-import { DailyWorkoutType } from "@/@types/dailyWorkout";
-import { TCreateWorkout } from "@/schemas/workoutSchemas";
+import { DailyExerciseType, DailyWorkoutType } from "@/@types/dailyWorkout";
+import { TCreateWorkout, TEditWorkout } from "@/schemas/workoutSchemas";
 import { TLogin } from "@/schemas/loginSchema";
 import { TRegister, TUpdateUser } from "@/schemas/userProfileSchemas";
 import { api } from "@/service/api";
@@ -57,6 +57,9 @@ interface ApiProviderData {
   deleteWorkout: (workoutId: number) => Promise<void>;
   workoutById: (workoutId: number) => Promise<void>;
   workoutToPage: DailyWorkoutType | undefined;
+  editExercise: (data: TEditWorkout) => Promise<void>;
+  exerciseToEdit: DailyExerciseType | undefined;
+  setExerciseToEdit: Dispatch<SetStateAction<DailyExerciseType | undefined>>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -76,6 +79,7 @@ export function ApiProvider({ children }: Props) {
   const [allExercises, setAllExercises] = useState<TAllExercises>();
   const [allMuscleGroups, setMuscleGroups] = useState<MuscleGroupListType>();
   const [workoutToPage, setWorkoutToPage] = useState<DailyWorkoutType>();
+  const [exerciseToEdit, setExerciseToEdit] = useState<DailyExerciseType>();
 
   const router = useRouter();
 
@@ -357,6 +361,25 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
+  const editExercise = async (data: TEditWorkout) => {
+    try {
+      await api.patch(
+        `workout/${workoutToPage!.id}/${exerciseToEdit!.id}`,
+        data,
+        headers
+      );
+
+      toast.success("Exercício editado com sucesso");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data.message}`);
+        console.log(error);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -385,6 +408,9 @@ export function ApiProvider({ children }: Props) {
         deleteWorkout,
         workoutById,
         workoutToPage,
+        editExercise,
+        exerciseToEdit,
+        setExerciseToEdit,
       }}
     >
       {children}

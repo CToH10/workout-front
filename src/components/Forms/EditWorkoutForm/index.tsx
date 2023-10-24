@@ -10,7 +10,7 @@ interface EditWorkoutFormProps {
   id: number;
 }
 
-export const EditWorkoutForm = ({ id }: EditWorkoutFormProps) => {
+export const EditWorkoutForm = () => {
   const {
     handleSubmit,
     register,
@@ -20,11 +20,10 @@ export const EditWorkoutForm = ({ id }: EditWorkoutFormProps) => {
     mode: "onBlur",
   });
 
-  const { setModalOpen } = useApi();
+  const { setModalOpen, editExercise, exerciseToEdit } = useApi();
 
   const onSubmit = (data: TEditWorkout) => {
-    console.log(data);
-    console.log(id);
+    editExercise(data);
 
     setModalOpen(false);
   };

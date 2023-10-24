@@ -43,8 +43,6 @@ export const EditUserProfileForm = () => {
 
   const onSubmit = (data: any) => {
     editProfile(data);
-
-    // console.log(data);
   };
 
   return (

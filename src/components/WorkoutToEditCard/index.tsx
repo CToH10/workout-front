@@ -5,13 +5,15 @@ import { FaPen, FaTrash } from "react-icons/fa";
 import Modal from "react-modal";
 import { useApi } from "@/context/apiContext";
 import { EditWorkoutForm } from "../Forms/EditWorkoutForm";
+import { useState } from "react";
 
 interface WorkoutToEditCard {
   workout: DailyExerciseType;
 }
 
 export const WorkoutToEditCard = ({ workout }: WorkoutToEditCard) => {
-  const { modalOpen, modalStyle, setModalOpen } = useApi();
+  const { modalOpen, modalStyle, setModalOpen, setExerciseToEdit } = useApi();
+  const [idToEdit, setIdToEdit] = useState<number>(workout.id);
 
   return (
     <>
@@ -41,7 +43,11 @@ export const WorkoutToEditCard = ({ workout }: WorkoutToEditCard) => {
         <section className="buttons flex gap-x-2 max-h-[30px]">
           <button
             className="btn-small btn-brand-outline-light w-[30px] flex justify-center items-center"
-            onClick={() => setModalOpen(true)}
+            onClick={() => {
+              setExerciseToEdit(workout);
+              setIdToEdit(idToEdit);
+              setModalOpen(true);
+            }}
           >
             {<FaPen />}
           </button>
@@ -66,7 +72,7 @@ export const WorkoutToEditCard = ({ workout }: WorkoutToEditCard) => {
         >
           Fechar
         </button>
-        <EditWorkoutForm id={workout.id} />
+        <EditWorkoutForm />
       </Modal>
     </>
   );
