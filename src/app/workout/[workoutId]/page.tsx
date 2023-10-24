@@ -19,7 +19,7 @@ export default function EditWorkout({
   }, []);
 
   return (
-    <section className="absolute top-[185px] left-2/4 -translate-x-2/4 translate-y-[12%] lg:translate-y-[20%]">
+    <section className="absolute top-[185px] left-2/4 -translate-x-2/4 -translate-y-[25%] max-h-[360px] min-h-[360px] max-w-[300px] lg:max-w-[770px]">
       <h1 className="text-heading1 text-grey-10">
         {getWorkoutDate(workoutToPage?.date!)}
       </h1>

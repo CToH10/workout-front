@@ -369,6 +369,8 @@ export function ApiProvider({ children }: Props) {
         headers
       );
 
+      workoutById(workoutToPage!.id);
+
       toast.success("Exercício editado com sucesso");
     } catch (error) {
       if (error instanceof AxiosError) {

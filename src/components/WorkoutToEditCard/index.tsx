@@ -17,7 +17,7 @@ export const WorkoutToEditCard = ({ workout }: WorkoutToEditCard) => {
 
   return (
     <>
-      <section className="exercise-card flex justify-between max-w-[340px] min-w-[340px]">
+      <section className="exercise-card flex justify-between lg:max-w-[340px] lg:min-w-[340px]">
         <section className="info max-w-[165px] min-w-[165px]">
           <p className="text-heading7 text-brand-1 font-semibold max-w-[100%] whitespace-nowrap overflow-hidden text-ellipsis">
             {workout.exercise.name}
