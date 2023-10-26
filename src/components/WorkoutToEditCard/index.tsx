@@ -19,23 +19,23 @@ export const WorkoutToEditCard = ({ workout }: WorkoutToEditCard) => {
     <>
       <section className="exercise-card flex justify-between lg:max-w-[340px] lg:min-w-[340px]">
         <section className="info max-w-[165px] min-w-[165px]">
-          <p className="text-heading7 text-brand-1 font-semibold max-w-[100%] whitespace-nowrap overflow-hidden text-ellipsis">
+          <p className="text-heading7 text-brand-1 font-semibold max-w-[100%] whitespace-nowrap">
             {workout.exercise.name}
           </p>
-          <p className="text-heading7 text-grey-10">
+          <p className="text-heading7 text-grey-10 whitespace-nowrap">
             Reps: <span className="font-semibold">{workout.reps}</span>
           </p>
-          <p className="text-heading7 text-grey-10">
+          <p className="text-heading7 text-grey-10 whitespace-nowrap">
             Peso:{" "}
             <span className="font-semibold">
               {workout.weight} {workout.weight > 1 ? "kgs" : "kg"}
             </span>
           </p>
-          <p className="text-heading7 text-grey-10">
+          <p className="text-heading7 text-grey-10 whitespace-nowrap">
             Séries: <span className="font-semibold">{workout.series}</span>
           </p>
 
-          <p className="text-heading7 text-grey-10">
+          <p className="text-heading7 text-grey-10 whitespace-nowrap">
             Carga total:{" "}
             <span className="font-semibold">{workout.totalLoad} kgs</span>
           </p>
