@@ -107,12 +107,7 @@ export function ApiProvider({ children }: Props) {
 
       router.push("/");
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -133,12 +128,7 @@ export function ApiProvider({ children }: Props) {
 
       setUserData(userInfo);
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -155,12 +145,7 @@ export function ApiProvider({ children }: Props) {
 
       setWorkoutByUser(workout);
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -171,12 +156,7 @@ export function ApiProvider({ children }: Props) {
       toast.success("Usuário criado com sucesso");
       setModalOpen(false);
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -209,12 +189,7 @@ export function ApiProvider({ children }: Props) {
 
       return list.data;
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -224,12 +199,7 @@ export function ApiProvider({ children }: Props) {
 
       return +newWorkout.data.id;
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -238,12 +208,7 @@ export function ApiProvider({ children }: Props) {
       const groupsList = await api.get("muscles");
       setMuscleGroups(groupsList.data);
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -259,12 +224,7 @@ export function ApiProvider({ children }: Props) {
 
       return exerciseByMuscle;
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -276,12 +236,7 @@ export function ApiProvider({ children }: Props) {
       await api.post(`workout/${workoutId}`, data, headers);
       toast.success("Exercício adicionado com sucesso");
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -299,12 +254,7 @@ export function ApiProvider({ children }: Props) {
       setModalOpen(false);
       toast.success("Perfil editado com sucesso");
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -319,12 +269,7 @@ export function ApiProvider({ children }: Props) {
       setUserData(undefined);
       router.push("/");
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -335,12 +280,7 @@ export function ApiProvider({ children }: Props) {
       await workoutByUserInfo();
       toast.success("Treino excluído");
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -352,12 +292,7 @@ export function ApiProvider({ children }: Props) {
 
       setWorkoutToPage(workoutInfo);
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
     }
   };
 
@@ -373,12 +308,16 @@ export function ApiProvider({ children }: Props) {
 
       toast.success("Exercício editado com sucesso");
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(`${error.response?.data.message}`);
-        console.log(error);
-      } else {
-        console.error(error);
-      }
+      emitErrorToast(error);
+    }
+  };
+
+  const emitErrorToast = (error: unknown) => {
+    if (error instanceof AxiosError) {
+      toast.error(`${error.response?.data.message}`);
+      console.log(error);
+    } else {
+      console.error(error);
     }
   };
 
