@@ -4,7 +4,7 @@ import { WorkoutToEditCard } from "@/components/WorkoutToEditCard";
 import { useApi } from "@/context/apiContext";
 import { getWorkoutDate } from "@/utils/workoutDate";
 import { useEffect } from "react";
-import { FaPen, FaTrash } from "react-icons/fa6";
+import { FaCalendarDay, FaTrash } from "react-icons/fa6";
 
 export default function EditWorkout({
   params,
@@ -27,7 +27,12 @@ export default function EditWorkout({
           {getWorkoutDate(workoutToPage?.date!)}
         </h1>
         <section className="buttons flex justify-between gap-4">
-          <button className="btn-medium btn-brand1">{<FaPen />}</button>
+          <button
+            className="btn-medium btn-brand1"
+            onClick={() => console.log("calendar")}
+          >
+            {<FaCalendarDay />}
+          </button>
           <button
             className="btn-medium btn-alert"
             onClick={() => {

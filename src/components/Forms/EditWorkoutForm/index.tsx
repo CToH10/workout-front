@@ -11,6 +11,8 @@ interface EditWorkoutFormProps {
 }
 
 export const EditWorkoutForm = () => {
+  const { setModalOpen, editExercise, exerciseToEdit } = useApi();
+
   const {
     handleSubmit,
     register,
@@ -18,9 +20,12 @@ export const EditWorkoutForm = () => {
   } = useForm<TEditWorkout>({
     resolver: zodResolver(editWorkoutSchema),
     mode: "onBlur",
+    defaultValues: {
+      reps: exerciseToEdit?.reps,
+      weight: exerciseToEdit?.weight,
+      series: exerciseToEdit?.series,
+    },
   });
-
-  const { setModalOpen, editExercise, exerciseToEdit } = useApi();
 
   const onSubmit = (data: TEditWorkout) => {
     editExercise(data);
@@ -59,7 +64,7 @@ export const EditWorkoutForm = () => {
         placeholder="Carga total"
         id="totalWeight"
         disabled={true}
-        defaultValue={0}
+        defaultValue={exerciseToEdit?.totalLoad}
       />
       <button
         type="submit"
