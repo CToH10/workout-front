@@ -3,7 +3,7 @@
 import { WorkoutToEditCard } from "@/components/WorkoutToEditCard";
 import { useApi } from "@/context/apiContext";
 import { getWorkoutDate } from "@/utils/workoutDate";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaCalendarDay, FaTrash } from "react-icons/fa6";
 
 export default function EditWorkout({
@@ -13,6 +13,8 @@ export default function EditWorkout({
 }) {
   const { protect, workoutToPage, workoutById, deleteWorkout, router } =
     useApi();
+
+  const [showCalendar, setShowCalendar] = useState(false);
 
   useEffect(() => {
     protect();
@@ -26,10 +28,10 @@ export default function EditWorkout({
         <h1 className="text-heading1 text-grey-10">
           {getWorkoutDate(workoutToPage?.date!)}
         </h1>
-        <section className="buttons flex justify-between gap-4">
+        <section className="buttons flex justify-between gap-4 relative">
           <button
             className="btn-medium btn-brand1"
-            onClick={() => console.log("calendar")}
+            onClick={() => setShowCalendar(!showCalendar)}
           >
             {<FaCalendarDay />}
           </button>
@@ -42,6 +44,15 @@ export default function EditWorkout({
           >
             {<FaTrash />}
           </button>
+          {showCalendar && (
+            <input
+              type="date"
+              name="workoutDay"
+              id="workoutDay"
+              className="absolute top-5 left-2"
+              onInput={(e) => console.log(e.currentTarget.value)}
+            />
+          )}
         </section>
       </section>
       <ul className="flex flex-wrap gap-6">

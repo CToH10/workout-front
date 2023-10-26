@@ -219,6 +219,10 @@ body {
     @apply bg-brand-3;
   }
 
+  input[type='date'] {
+    @apply bg-brand-4
+  }
+
   input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(20%) sepia(94%) saturate(2948%) hue-rotate(245deg)
       brightness(85%) contrast(116%);
@@ -226,7 +230,7 @@ body {
   }
 
   input[type="date"]:invalid::-webkit-datetime-edit {
-    @apply font-normal text-grey-3 bg-grey-1;
+    @apply font-normal text-grey-0 bg-brand-3 rounded;
   }
 
   .filled {
