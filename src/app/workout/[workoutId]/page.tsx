@@ -11,7 +11,8 @@ export default function EditWorkout({
 }: {
   params: { workoutId: number | string };
 }) {
-  const { protect, workoutToPage, workoutById } = useApi();
+  const { protect, workoutToPage, workoutById, deleteWorkout, router } =
+    useApi();
 
   useEffect(() => {
     protect();
@@ -27,7 +28,15 @@ export default function EditWorkout({
         </h1>
         <section className="buttons flex justify-between gap-4">
           <button className="btn-medium btn-brand1">{<FaPen />}</button>
-          <button className="btn-medium btn-alert">{<FaTrash />}</button>
+          <button
+            className="btn-medium btn-alert"
+            onClick={() => {
+              deleteWorkout(workoutToPage!.id);
+              router.push("/profile");
+            }}
+          >
+            {<FaTrash />}
+          </button>
         </section>
       </section>
       <ul className="flex flex-wrap gap-6">

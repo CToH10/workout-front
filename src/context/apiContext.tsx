@@ -23,6 +23,7 @@ import {
   useState,
 } from "react";
 import { toast } from "react-toastify";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 interface Props {
   children: ReactNode;
@@ -60,6 +61,7 @@ interface ApiProviderData {
   editExercise: (data: TEditWorkout) => Promise<void>;
   exerciseToEdit: DailyExerciseType | undefined;
   setExerciseToEdit: Dispatch<SetStateAction<DailyExerciseType | undefined>>;
+  router: AppRouterInstance
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -352,6 +354,7 @@ export function ApiProvider({ children }: Props) {
         editExercise,
         exerciseToEdit,
         setExerciseToEdit,
+        router
       }}
     >
       {children}

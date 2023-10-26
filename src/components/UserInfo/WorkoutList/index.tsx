@@ -4,16 +4,13 @@ import { useApi } from "@/context/apiContext";
 import { DailyExerciseList } from "./DailyExercise";
 import { getWorkoutDate } from "@/utils/workoutDate";
 import { FaPen, FaTrash } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 
 interface WorkoutListProps {
   className: string;
 }
 
 export const WorkoutList = ({ className }: WorkoutListProps) => {
-  const { workoutByUser, deleteWorkout } = useApi();
-
-  const router = useRouter();
+  const { workoutByUser, deleteWorkout, router } = useApi();
 
   return (
     <section className={className}>
