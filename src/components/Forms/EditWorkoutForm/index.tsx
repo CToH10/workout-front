@@ -6,10 +6,6 @@ import { Field } from "@/components/Field";
 import { useApi } from "@/context/apiContext";
 import { TEditWorkout, editWorkoutSchema } from "@/schemas/workoutSchemas";
 
-interface EditWorkoutFormProps {
-  id: number;
-}
-
 export const EditWorkoutForm = () => {
   const { setModalOpen, editExercise, exerciseToEdit } = useApi();
 
