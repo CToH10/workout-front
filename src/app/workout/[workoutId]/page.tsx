@@ -22,6 +22,8 @@ export default function EditWorkout({
 
   const [showCalendar, setShowCalendar] = useState(false);
 
+  const maxDate = new Date().toISOString().split("T")[0];
+
   useEffect(() => {
     protect();
     workoutById(Number(params.workoutId));
@@ -56,9 +58,9 @@ export default function EditWorkout({
               name="workoutDay"
               id="workoutDay"
               className="absolute top-5 left-2"
+              max={maxDate}
               onInput={(e) => {
                 editWorkoutDate({ date: e.currentTarget.value });
-                setShowCalendar(false);
               }}
             />
           )}
