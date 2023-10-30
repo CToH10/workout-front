@@ -61,7 +61,8 @@ interface ApiProviderData {
   editExercise: (data: TEditWorkout) => Promise<void>;
   exerciseToEdit: DailyExerciseType | undefined;
   setExerciseToEdit: Dispatch<SetStateAction<DailyExerciseType | undefined>>;
-  router: AppRouterInstance
+  editWorkoutDate: (data: { date: string }) => Promise<void>;
+  router: AppRouterInstance;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -323,6 +324,16 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
+  const editWorkoutDate = async (data: { date: string }) => {
+    try {
+      await api.patch(`workout/${workoutToPage!.id}`, data, headers);
+
+      workoutById(workoutToPage!.id);
+    } catch (error) {
+      emitErrorToast(error);
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -354,7 +365,8 @@ export function ApiProvider({ children }: Props) {
         editExercise,
         exerciseToEdit,
         setExerciseToEdit,
-        router
+        editWorkoutDate,
+        router,
       }}
     >
       {children}

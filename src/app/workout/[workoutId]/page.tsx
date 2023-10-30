@@ -11,8 +11,14 @@ export default function EditWorkout({
 }: {
   params: { workoutId: number | string };
 }) {
-  const { protect, workoutToPage, workoutById, deleteWorkout, router } =
-    useApi();
+  const {
+    protect,
+    workoutToPage,
+    workoutById,
+    deleteWorkout,
+    router,
+    editWorkoutDate,
+  } = useApi();
 
   const [showCalendar, setShowCalendar] = useState(false);
 
@@ -50,7 +56,10 @@ export default function EditWorkout({
               name="workoutDay"
               id="workoutDay"
               className="absolute top-5 left-2"
-              onInput={(e) => console.log(e.currentTarget.value)}
+              onInput={(e) => {
+                editWorkoutDate({ date: e.currentTarget.value });
+                setShowCalendar(false);
+              }}
             />
           )}
         </section>
