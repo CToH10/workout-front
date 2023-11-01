@@ -4,6 +4,7 @@ import { useApi } from "@/context/apiContext";
 import { DailyExerciseList } from "./DailyExercise";
 import { getWorkoutDate } from "@/utils/workoutDate";
 import { FaPen, FaTrash } from "react-icons/fa";
+import Link from "next/link";
 
 interface WorkoutListProps {
   className: string;
@@ -27,14 +28,12 @@ export const WorkoutList = ({ className }: WorkoutListProps) => {
                   {getWorkoutDate(workout.date)}
                 </p>
                 <section className="max-w-[35%] min-w-[35%] flex justify-between">
-                  <button
-                    className="btn-small btn-brand-opacity"
-                    onClick={() => {
-                      router.push(`workout/${workout.id}`);
-                    }}
+                  <Link
+                    className="btn-small btn-brand-opacity flex items-center justify-center"
+                    href={`workout/${workout.id}`}
                   >
                     <FaPen />
-                  </button>
+                  </Link>
                   <button
                     className="btn-small btn-alert"
                     onClick={() => {
