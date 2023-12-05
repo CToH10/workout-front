@@ -44,7 +44,7 @@ export const LoginForm = () => {
       />
       <button
         type="submit"
-        className="btn-medium w-4/5 btn-brand-opacity self-center"
+        className="btn-big w-4/5 btn-brand-opacity self-center font-semibold"
       >
         Login
       </button>

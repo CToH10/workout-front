@@ -15,7 +15,7 @@ export default function LoginPage() {
             Ainda não é registrado?
           </p>
           <button
-            className="btn-medium w-[35%] btn-brand1 text-btnMedium"
+            className="btn-big w-[35%] btn-brand1 text-btnBig"
             onClick={() => {
               setModalOpen(!modalOpen);
             }}

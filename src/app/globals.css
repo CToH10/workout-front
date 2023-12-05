@@ -81,7 +81,7 @@ body {
   }
 
   .btn-brand-opacity:hover {
-    @apply border-2 bg-grey-6 text-brand-1 font-bold border-brand-3;
+    @apply border-2 bg-brand-3 text-brand-1 font-bold border-brand-3;
   }
 
   .btn-light {
