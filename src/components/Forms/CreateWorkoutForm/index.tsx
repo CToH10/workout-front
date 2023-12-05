@@ -133,7 +133,7 @@ export const CreateWorkoutForm = () => {
       />
       <button
         type="submit"
-        className="btn-big w-4/5 btn-brand-opacity self-center"
+        className="btn-big w-4/5 btn-brand-opacity self-center font-semibold"
       >
         Adicionar exercício
       </button>

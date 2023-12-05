@@ -32,9 +32,10 @@ export const EditWorkoutForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center"
+      className="flex flex-col justify-center gap-3"
     >
       <Field
+        type="number"
         label="Repetições"
         placeholder="Repetições"
         id="reps"
@@ -42,13 +43,7 @@ export const EditWorkoutForm = () => {
         error={errors.reps?.message}
       />
       <Field
-        label="Peso"
-        placeholder="Peso"
-        id="weight"
-        register={register("weight")}
-        error={errors.weight?.message}
-      />
-      <Field
+        type="number"
         label="Séries"
         placeholder="Séries"
         id="series"
@@ -56,6 +51,15 @@ export const EditWorkoutForm = () => {
         error={errors.series?.message}
       />
       <Field
+        type="number"
+        label="Peso"
+        placeholder="Peso"
+        id="weight"
+        register={register("weight")}
+        error={errors.weight?.message}
+      />
+      <Field
+        type="number"
         label="Carga total"
         placeholder="Carga total"
         id="totalWeight"
