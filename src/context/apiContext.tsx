@@ -317,7 +317,9 @@ export function ApiProvider({ children }: Props) {
 
   const emitErrorToast = (error: unknown) => {
     if (error instanceof AxiosError) {
-      toast.error(`${error.response?.data.message}`);
+      error.response?.data.message === "jwt malformed"
+        ? toast.error("Expired user token")
+        : toast.error(`${error.response?.data.message}`);
       console.log(error);
     } else {
       console.error(error);

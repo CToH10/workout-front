@@ -11,7 +11,7 @@ interface WorkoutListProps {
 }
 
 export const WorkoutList = ({ className }: WorkoutListProps) => {
-  const { workoutByUser, deleteWorkout, router } = useApi();
+  const { workoutByUser, deleteWorkout } = useApi();
 
   return (
     <section className={className}>

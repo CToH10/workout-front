@@ -17,7 +17,6 @@ export const LoginForm = () => {
   const { login } = useApi();
 
   const onSubmit = (data: TLogin) => {
-
     login(data);
   };
 
@@ -32,6 +31,7 @@ export const LoginForm = () => {
         id="email"
         register={register("email")}
         error={errors.email?.message}
+        className="text-grey-whiteFixed"
       />
       <Field
         type="password"
@@ -40,6 +40,7 @@ export const LoginForm = () => {
         id="password"
         register={register("password")}
         error={errors.password?.message}
+        className="text-grey-whiteFixed"
       />
       <button
         type="submit"
