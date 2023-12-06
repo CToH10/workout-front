@@ -63,6 +63,7 @@ interface ApiProviderData {
   setExerciseToEdit: Dispatch<SetStateAction<DailyExerciseType | undefined>>;
   editWorkoutDate: (data: { date: string }) => Promise<void>;
   router: AppRouterInstance;
+  deleteExercise: (id: number) => Promise<void>;
 }
 
 export const ApiContext = createContext<ApiProviderData>({} as ApiProviderData);
@@ -336,6 +337,17 @@ export function ApiProvider({ children }: Props) {
     }
   };
 
+  const deleteExercise = async (id: number) => {
+    try {
+      await api.delete(`workout/${workoutToPage!.id}/${id}`, headers);
+
+      toast.success("Exercise deleted");
+      workoutById(workoutToPage!.id);
+    } catch (error) {
+      emitErrorToast(error);
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -369,6 +381,7 @@ export function ApiProvider({ children }: Props) {
         setExerciseToEdit,
         editWorkoutDate,
         router,
+        deleteExercise,
       }}
     >
       {children}

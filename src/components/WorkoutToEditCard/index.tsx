@@ -12,7 +12,13 @@ interface WorkoutToEditCard {
 }
 
 export const WorkoutToEditCard = ({ workout }: WorkoutToEditCard) => {
-  const { modalOpen, modalStyle, setModalOpen, setExerciseToEdit } = useApi();
+  const {
+    modalOpen,
+    modalStyle,
+    setModalOpen,
+    setExerciseToEdit,
+    deleteExercise,
+  } = useApi();
   const [idToEdit, setIdToEdit] = useState<number>(workout.id);
 
   return (
@@ -51,7 +57,10 @@ export const WorkoutToEditCard = ({ workout }: WorkoutToEditCard) => {
           >
             {<FaPen />}
           </button>
-          <button className="btn-small btn-alert w-[30px] flex justify-center items-center">
+          <button
+            className="btn-small btn-alert w-[30px] flex justify-center items-center"
+            onClick={() => deleteExercise(workout.id)}
+          >
             {<FaTrash />}
           </button>
         </section>
